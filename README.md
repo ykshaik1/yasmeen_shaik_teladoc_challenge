@@ -5,6 +5,6 @@ Open the command prompt and navigate to the folder in which pom.xml file is pres
 Run the below Maven command  
 mvn clean test
 
-Once the execution completes report & log will be generated in below folder.
+Once the execution completes report will be generated in below folder.
 
-Log: target/logs
+Test Report: target/surefire-reports/emailable-report.html
