@@ -7,7 +7,8 @@ import java.util.*;
 
 public class MovieTitleTest {
     Main movie;
-
+    String searchTerm;
+    Integer year;
     @BeforeClass
     public void initiateApp() {
         movie = new Main();
@@ -16,8 +17,8 @@ public class MovieTitleTest {
 
     @Test(priority = 0)
     public void Test01_Movie_Should_Contain_Search_Term() {
-        String searchTerm = "maze";
-        Integer year = 2000;
+        searchTerm = "maze";
+        year = 2000;
         List<String> titles = movie.getMovieTitles(searchTerm, year);
         Assert.assertTrue(titles.get(0).toLowerCase().contains(searchTerm),"results do not contain search term");
         Reporter.log("Search term "+searchTerm+" found in first result : "+titles.get(0),true);
@@ -27,8 +28,8 @@ public class MovieTitleTest {
 
     @Test(priority = 1)
     public void Test02_No_Results_For_Incorrect_Search_Term(){
-        String searchTerm = "noSuchMovie";
-        Integer year = 2000;
+        searchTerm = "noSuchMovie";
+        year = 2000;
         List<String> titles = movie.getMovieTitles(searchTerm, year);
         Assert.assertTrue(titles.size()==0,"Garbage results received for search term : "+searchTerm);
         Reporter.log("No results for search term : "+searchTerm,true);
@@ -36,11 +37,12 @@ public class MovieTitleTest {
 
     @Test(priority = 2)
     public void Test03_No_Results_For_Incorrect_Search_Year(){
-        String searchTerm = "maze";
-        Integer year = 1000;
+        searchTerm = "maze";
+        year = 1000;
         List<String> titles = movie.getMovieTitles(searchTerm, year);
         Assert.assertTrue(titles.size()==0,"Garbage results received for search year : "+year);
         Reporter.log("No results for search year : "+year,true);
     }
+
 
 }

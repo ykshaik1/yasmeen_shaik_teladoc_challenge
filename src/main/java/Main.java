@@ -1,3 +1,5 @@
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import pojo.Movies;
 import pojo.MoviesData;
 
@@ -13,9 +15,9 @@ public class Main {
 
     public List<String> getMovieTitles(String title, Integer year) {
         List<String> allMovieTitles = new ArrayList<>();
-        List<Movies> allMovies = getAllMovies(title,year);
+        List<Movies> allMovies = getAllMovies(title, year);
 
-        for (Movies movie: allMovies) {
+        for (Movies movie : allMovies) {
             allMovieTitles.add(movie.getTitle());
             Collections.sort(allMovieTitles);
         }
@@ -26,17 +28,17 @@ public class Main {
     private List<Movies> getAllMovies(String title, Integer year) {
         MoviesData moviesData;
         List<Movies> allMovies = new ArrayList<>();
-        do{
-            moviesData  = getAllMovieData(title, year, initialPage);
+        do {
+            moviesData = getAllMovieData(title, year, initialPage);
             allMovies.addAll(moviesData.getData());
             initialPage++;
-        }while(initialPage<= moviesData.getTotalPages());
-        return  allMovies;
+        } while (initialPage <= moviesData.getTotalPages());
+        return allMovies;
     }
 
     private MoviesData getAllMovieData(String title, Integer year, Integer page) {
 
-        return given().header("Accept", "*/*")
+        return given().header("Accept", "*/*").filter(new RequestLoggingFilter()).filter(new ResponseLoggingFilter())
                 .param("Title", title)
                 .param("Year", year)
                 .param("page", page)
