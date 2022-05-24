@@ -12,16 +12,8 @@ public class Main {
     Integer initialPage = 1;
 
     public List<String> getMovieTitles(String title, Integer year) {
-        List<Movies> allMovies = new ArrayList<>();
         List<String> allMovieTitles = new ArrayList<>();
-        MoviesData moviesData;
-
-        do{
-            moviesData  = getAllMovieData(title, year, initialPage);
-            allMovies.addAll(moviesData.getData());
-            initialPage++;
-            System.out.println("size = "+allMovies.size());
-        }while(initialPage<= moviesData.getTotalPages());
+        List<Movies> allMovies = getAllMovies(title,year);
 
         for (Movies movie: allMovies) {
             allMovieTitles.add(movie.getTitle());
@@ -29,7 +21,17 @@ public class Main {
         }
 
         return allMovieTitles;
+    }
 
+    private List<Movies> getAllMovies(String title, Integer year) {
+        MoviesData moviesData;
+        List<Movies> allMovies = new ArrayList<>();
+        do{
+            moviesData  = getAllMovieData(title, year, initialPage);
+            allMovies.addAll(moviesData.getData());
+            initialPage++;
+        }while(initialPage<= moviesData.getTotalPages());
+        return  allMovies;
     }
 
     private MoviesData getAllMovieData(String title, Integer year, Integer page) {
