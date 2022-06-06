@@ -11,9 +11,10 @@ import static io.restassured.RestAssured.given;
 
 public class Main {
     String uri = "https://jsonmock.hackerrank.com/api/movies/", endpoint = "search";
-    Integer initialPage = 1;
+    Integer initialPage = 0;
 
     public List<String> getMovieTitles(String title, Integer year) {
+    	initialPage = 1;
         List<String> allMovieTitles = new ArrayList<>();
         List<Movies> allMovies = getAllMovies(title, year);
 
