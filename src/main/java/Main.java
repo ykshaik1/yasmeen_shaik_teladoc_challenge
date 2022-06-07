@@ -20,9 +20,8 @@ public class Main {
 
         for (Movies movie : allMovies) {
             allMovieTitles.add(movie.getTitle());
-            Collections.sort(allMovieTitles);
         }
-
+        Collections.sort(allMovieTitles);
         return allMovieTitles;
     }
 
